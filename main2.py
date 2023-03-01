@@ -1,10 +1,10 @@
-import random
-import pygame
-import sys
 import os
+import random
+import sys
 
-from PyQt5.QtWidgets import QMainWindow, QApplication
+import pygame
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QMainWindow, QApplication
 
 from data import mainwind_des
 
@@ -197,11 +197,6 @@ class Minesweeper(Board):
         for y in range(self.height):
             for x in range(self.width):
 
-                # if self.board[y][x] == 10: # Покраска мин
-                #     pygame.draw.rect(screen, pygame.Color((144, 144, 144)),                                                     # Цвет мин (144, 144, 144)
-                #                      (x * self.cell_size + self.left, y * self.cell_size + self.top, self.cell_size,  # Цвет мин
-                #                       self.cell_size))                                                                # Цвет мин
-
                 if self.board[y][x] >= 1 and self.board[y][x] != 10:  # Если мин вокруг более 1...
                     pygame.draw.rect(screen, pygame.Color(184, 184, 184),
                                      (x * self.cell_size + self.left, y * self.cell_size + self.top,
@@ -210,7 +205,7 @@ class Minesweeper(Board):
                     font = pygame.font.Font(None, self.cell_size - 6)
                     text = font.render(str(self.board[y][x]), True, (0, 0, 0))
                     screen.blit(text, (
-                    x * self.cell_size + self.left + 3, y * self.cell_size + self.top + 3))
+                        x * self.cell_size + self.left + 3, y * self.cell_size + self.top + 3))
 
                 if self.board[y][x] == 0:  # Если мин вокруг 0...
                     pygame.draw.rect(screen, pygame.Color(184, 184, 184),
@@ -260,7 +255,8 @@ class Minesweeper(Board):
         s = 0
         for y in range(self.height):
             for x in range(self.width):
-                if (self.board[y][x] == 10) or (self.board[y][x] == -2) or (self.board[y][x] == -1) or (flags != 0):
+                if (self.board[y][x] == 10) or (self.board[y][x] == -2) or (
+                        self.board[y][x] == -1) or (flags != 0):
                     s += 1
         if s == 0:
             self.win()
@@ -306,7 +302,7 @@ class Minesweeper(Board):
 
                     myimage = pygame.image.load("data/bomb_icon.png")
                     screen.blit(myimage, (
-                    x * self.cell_size + self.left + 3, y * self.cell_size + self.top + 2))
+                        x * self.cell_size + self.left + 3, y * self.cell_size + self.top + 2))
                     pygame.display.flip()
 
                     pygame.draw.rect(screen, pygame.Color(0, 0, 0),
@@ -328,7 +324,6 @@ class Minesweeper(Board):
                 f.write(f'{lvl};{time};{sixGame}')
 
 
-
 class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
     def __init__(self, parent=None):
         global lvl, extra_lives, sixGame
@@ -346,7 +341,7 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
 
         self.pushButton.clicked.connect(self.start_game)
 
-        extra_lives= self.spinBox_2.value()
+        extra_lives = self.spinBox_2.value()
         lvl = int(self.spinBox.value())
 
         print(sixGameDone)
@@ -356,7 +351,8 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
             sixGame = 1
 
     def start_game(self):
-        global lvl, time, flags, sixGame, running, screen, size, stoprender, sixGameDone, clock, all_sprites, extra_lives
+        global lvl, time, flags, sixGame, running, screen, size, stoprender, sixGameDone, clock, \
+            all_sprites, extra_lives
         ex.close()
 
         extra_lives = self.spinBox_2.value()
@@ -365,6 +361,7 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
         pygame.init()
         clock = pygame.time.Clock()
         all_sprites = pygame.sprite.Group()
+        pygame.display.set_caption('Сапёр')
 
         stoprender = False
         time = 0
