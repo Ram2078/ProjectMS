@@ -10,7 +10,6 @@ from data import mainwind_des
 
 with open('data/score_time', 'r') as f:
     result = f.readlines(0)[0].split(';')
-    print(result)
     top_score = int(result[0])
     last_time = int(result[1])
     sixGameDone = int(result[2])
@@ -91,7 +90,6 @@ class Minesweeper(Board):
     def check_cell(self, cell):  # Проверка клетки без её открытия
         x, y = cell
         s = self.board[y][x]
-        print('Коорд-ы клетки: ' + str(cell) + '. Значение клетки: ' + str(s))
         return s
 
     def open_cell(self, cell, justOpen=False):  # открытие клетки
@@ -126,7 +124,6 @@ class Minesweeper(Board):
                 if self.board[y + dy][x + dx] == 10 or self.board[y + dy][x + dx] == -3:
                     s += 1
 
-        print('Коорд-ы клетки: ' + str(cell) + '. Кол-во мин вокруг клетки: ' + str(s))
         self.board[y][x] = s
 
         if not justOpen:
@@ -330,8 +327,6 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
-        print('showed!')
-
         self.lcdNumber_2.display(top_score)
         self.lcdNumber.display(last_time)
         self.spinBox_2.setValue(3)
@@ -344,7 +339,6 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
         extra_lives = self.spinBox_2.value()
         lvl = int(self.spinBox.value())
 
-        print(sixGameDone)
         if sixGameDone:
             self.label_5.setHidden(True)
             self.spinBox_2.setEnabled(True)
@@ -356,7 +350,6 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
         ex.close()
 
         extra_lives = self.spinBox_2.value()
-        print('hidden!')
 
         pygame.init()
         clock = pygame.time.Clock()
@@ -417,7 +410,6 @@ class MainWindow(QMainWindow, mainwind_des.Ui_MainWindow):
                     if (ticks % 100 == 0):
                         time += 1
                         ticks = 0
-                        print(time)
 
             pygame.display.flip()
             clock.tick(100)
